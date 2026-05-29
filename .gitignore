@@ -1,6 +1,7 @@
 # WordPress deployment scripts (contains credentials)
 update-wordpress.py
 update-wordpress.sh
+restore-wordpress.py
 
 # OS files
 .DS_Store
