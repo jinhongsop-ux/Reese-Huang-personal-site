@@ -17,6 +17,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Replaced the homepage text-only Index Wall with a scrollable mixed-size visual capability gallery using `.rh-gallery-section`.
 - Optimized the gallery into an auto-scrolling infinite loop that pauses on hover, focus, or pointer hold.
 - Repaired homepage display safety by making reveal content visible by default and isolating JS init failures with `safeInit`.
+- Strengthened the gallery autoplay with virtual scroll accumulation, faster visible motion, and mobile-only static grid behavior without cloned tiles.
 
 ## Local Files
 
@@ -120,6 +121,7 @@ Avoid:
   - light pointer-depth effect on project cards
   - auto-scrolling infinite capability gallery with hover/focus/hold pause
   - guarded module initialization so one JS error cannot blank the page
+  - mobile breakpoint behavior that disables gallery cloning/autoplay and uses a compact readable grid
 
 ## Verification Already Performed
 
@@ -133,6 +135,7 @@ Avoid:
 - Public homepage contains the new `.rh-gallery-section` visual index and `data-rh-gallery` scroll behavior.
 - Public homepage contains the optimized gallery loop code using `requestAnimationFrame`, cloned gallery items, and pointer/focus pause events.
 - Public homepage contains reveal-safe CSS where `[data-reveal]` remains visible even if JavaScript fails.
+- Public homepage contains the updated gallery speed, virtual scroll state, and mobile clone-hiding CSS.
 
 ## Security Notes
 

@@ -114,6 +114,8 @@
     if (!galleries.length || prefersReducedMotion) return;
 
     galleries.forEach(function (gallery) {
+      if (window.innerWidth <= 760) return;
+
       var track = gallery.querySelector(".rh-gallery-track");
       if (!track || track.getAttribute("data-rh-cloned") === "true") return;
 
@@ -131,8 +133,9 @@
       var isVisible = true;
       var startX = 0;
       var startScroll = 0;
+      var virtualScroll = gallery.scrollLeft;
       var lastTime = 0;
-      var speed = 18;
+      var speed = 44;
 
       function getLoopPoint() {
         return Math.max(1, track.scrollWidth / 2);
@@ -140,11 +143,12 @@
 
       function normalizeScroll() {
         var loopPoint = getLoopPoint();
-        if (gallery.scrollLeft >= loopPoint) {
-          gallery.scrollLeft -= loopPoint;
-        } else if (gallery.scrollLeft < 0) {
-          gallery.scrollLeft += loopPoint;
+        if (virtualScroll >= loopPoint) {
+          virtualScroll -= loopPoint;
+        } else if (virtualScroll < 0) {
+          virtualScroll += loopPoint;
         }
+        gallery.scrollLeft = virtualScroll;
       }
 
       function setPaused(value) {
@@ -157,7 +161,7 @@
         lastTime = time;
 
         if (!isPaused && !isDragging && isVisible && window.innerWidth > 760) {
-          gallery.scrollLeft += (speed * delta) / 1000;
+          virtualScroll += (speed * delta) / 1000;
           normalizeScroll();
         }
 
@@ -169,7 +173,7 @@
         if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
 
         event.preventDefault();
-        gallery.scrollLeft += event.deltaY;
+        virtualScroll = gallery.scrollLeft + event.deltaY;
         normalizeScroll();
       }, { passive: false });
 
@@ -195,12 +199,13 @@
         setPaused(true);
         startX = event.clientX;
         startScroll = gallery.scrollLeft;
+        virtualScroll = gallery.scrollLeft;
         gallery.setPointerCapture(event.pointerId);
       });
 
       gallery.addEventListener("pointermove", function (event) {
         if (!isDragging) return;
-        gallery.scrollLeft = startScroll - (event.clientX - startX);
+        virtualScroll = startScroll - (event.clientX - startX);
         normalizeScroll();
       });
 
