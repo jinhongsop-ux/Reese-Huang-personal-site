@@ -23,6 +23,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Added a custom homepage footer and changed the homepage nav to fixed positioning so it remains usable while scrolling.
 - Cleaned the homepage section/card frame system with consistent soft borders, panel backgrounds, and less noisy internal divider lines.
 - Restored the live WordPress homepage and project archive after an external edit broke styling/module structure; both pages were republished as 17 Custom HTML blocks.
+- Removed the homepage gallery's extra scroll-hint decorations and reinforced WordPress full-width container overrides.
 
 ## Local Files
 
