@@ -9,22 +9,30 @@
   --rs-panel-strong: #fffdf8;
   --rs-purple: #cfc3ef;
   --rs-purple-soft: #eee8fb;
+  --rs-purple-muted: #d8cfe8;
   --rs-green: #b9ded2;
   --rs-green-soft: #e5f3ec;
+  --rs-green-muted: #c5ddd4;
   --rs-yellow: #f2d66b;
+  --rs-yellow-soft: #f5e6a3;
   --rs-ink: #20231f;
   --rs-ink-green: #18342d;
   --rs-muted: #6d7069;
   --rs-line: rgba(32, 35, 31, 0.1);
   --rs-shadow: 0 24px 70px rgba(70, 76, 62, 0.12);
+  --rs-shadow-soft: 0 8px 32px rgba(207, 195, 239, 0.15);
+  --rs-shadow-hover: 0 12px 40px rgba(207, 195, 239, 0.25);
   --rs-radius: 8px;
   --rs-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --rs-font-heading: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --rs-font-accent: "EB Garamond", "Crimson Text", Georgia, serif;
+  --rs-font-body: "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
   background:
     radial-gradient(circle at 18% 8%, rgba(207, 195, 239, 0.32), transparent 28rem),
     radial-gradient(circle at 86% 14%, rgba(185, 222, 210, 0.34), transparent 27rem),
     linear-gradient(180deg, #fbfaf5 0%, #f7f5ee 100%);
   color: var(--rs-ink);
-  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--rs-font-body);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -96,10 +104,30 @@ body.admin-bar .reese-space .rs-nav {
 .reese-projects .rp-home {
   color: var(--rs-muted);
   font-size: 13px;
+  position: relative;
   transition: color 220ms var(--rs-ease), transform 220ms var(--rs-ease);
 }
 
-.reese-space .rs-nav-links a:hover,
+.reese-space .rs-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--rs-purple), var(--rs-green));
+  transition: width 300ms var(--rs-ease);
+}
+
+.reese-space .rs-nav-links a:hover {
+  color: var(--rs-ink-green);
+  transform: translateY(-1px);
+}
+
+.reese-space .rs-nav-links a:hover::after {
+  width: 100%;
+}
+
 .reese-projects .rp-home:hover {
   color: var(--rs-ink-green);
   transform: translateY(-1px);
@@ -164,9 +192,10 @@ body.admin-bar .reese-space .rs-nav {
 .reese-space .rs-hero h1,
 .reese-projects .rp-hero h1 {
   color: var(--rs-ink-green);
+  font-family: var(--rs-font-heading);
   font-size: clamp(4.1rem, 13vw, 11.8rem);
   font-weight: 520;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   line-height: 0.88;
   margin: 0;
 }
@@ -186,7 +215,8 @@ body.admin-bar .reese-space .rs-nav {
 .reese-projects .rp-hero p {
   color: var(--rs-muted);
   font-size: clamp(1rem, 1.35vw, 1.18rem);
-  line-height: 1.8;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
   margin: 18px 0 0;
   max-width: 720px;
 }
@@ -219,6 +249,7 @@ body.admin-bar .reese-space .rs-nav {
 .reese-space .rs-button:hover,
 .reese-projects .rp-actions a:hover {
   transform: translateY(-2px);
+  box-shadow: var(--rs-shadow-soft);
 }
 
 .reese-space .rs-button-primary,
@@ -226,6 +257,11 @@ body.admin-bar .reese-space .rs-nav {
   background: var(--rs-ink-green);
   border-color: var(--rs-ink-green);
   color: #fbfaf5;
+}
+
+.reese-space .rs-button-primary:hover {
+  background: #1e3d34;
+  box-shadow: var(--rs-shadow-hover);
 }
 
 .reese-space .rs-button-ghost,
@@ -385,9 +421,10 @@ body.admin-bar .reese-space .rs-nav {
 .reese-space .rs-section-head h2,
 .reese-projects .rp-footer h2 {
   color: var(--rs-ink-green);
+  font-family: var(--rs-font-heading);
   font-size: clamp(2.1rem, 5.4vw, 5.9rem);
   font-weight: 520;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 0.96;
   margin: 0;
   max-width: 830px;
@@ -633,6 +670,7 @@ body.admin-bar .reese-space .rs-nav {
   mask-image: radial-gradient(circle at 50% 50%, #000 0 48%, transparent 82%);
   opacity: 0.55;
   position: absolute;
+  transition: opacity 300ms var(--rs-ease);
   z-index: -2;
 }
 
@@ -655,8 +693,8 @@ body.admin-bar .reese-space .rs-nav {
 
 .rh-gallery-section .rh-gallery-tile:hover {
   border-color: rgba(31, 39, 35, 0.2);
-  box-shadow: 0 20px 54px rgba(56, 67, 56, 0.12);
-  transform: translate3d(0, -5px, 0);
+  box-shadow: 0 20px 54px rgba(56, 67, 56, 0.12), var(--rs-shadow-soft);
+  transform: translate3d(0, -6px, 0) scale(1.01);
 }
 
 .rh-gallery-section .rh-gallery-tile:hover::after {
@@ -707,9 +745,10 @@ body.admin-bar .reese-space .rs-nav {
 .rh-gallery-section .rh-gallery-tile strong {
   color: var(--rh-ink);
   display: block;
+  font-family: var(--rs-font-heading);
   font-size: clamp(1.35rem, 2.8vw, 3.15rem);
   font-weight: 560;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 0.98;
   margin: 44px 0 10px;
   max-width: 9ch;
