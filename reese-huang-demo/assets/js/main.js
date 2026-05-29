@@ -120,118 +120,56 @@
       if (!track || track.getAttribute("data-rh-cloned") === "true") return;
 
       var originalItems = Array.prototype.slice.call(track.children);
+      var firstClone = null;
+
       originalItems.forEach(function (item) {
         var clone = item.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
         clone.setAttribute("tabindex", "-1");
+        if (!firstClone) firstClone = clone;
         track.appendChild(clone);
       });
       track.setAttribute("data-rh-cloned", "true");
 
-      var isDragging = false;
-      var isPaused = false;
-      var isVisible = true;
-      var startX = 0;
-      var startScroll = 0;
-      var virtualScroll = gallery.scrollLeft;
-      var lastTime = 0;
-      var speed = 44;
-
-      function getLoopPoint() {
-        return Math.max(1, track.scrollWidth / 2);
-      }
-
-      function normalizeScroll() {
-        var loopPoint = getLoopPoint();
-        if (virtualScroll >= loopPoint) {
-          virtualScroll -= loopPoint;
-        } else if (virtualScroll < 0) {
-          virtualScroll += loopPoint;
+      function setLoopDistance() {
+        if (!firstClone) return;
+        var distance = firstClone.offsetLeft;
+        if (distance > 0) {
+          track.style.setProperty("--rh-loop-distance", distance + "px");
+          track.classList.add("is-auto-loop");
         }
-        gallery.scrollLeft = virtualScroll;
       }
 
-      function setPaused(value) {
-        isPaused = value;
-      }
-
-      function tick(time) {
-        if (!lastTime) lastTime = time;
-        var delta = Math.min(34, time - lastTime);
-        lastTime = time;
-
-        if (!isPaused && !isDragging && isVisible && window.innerWidth > 760) {
-          virtualScroll += (speed * delta) / 1000;
-          normalizeScroll();
-        }
-
-        window.requestAnimationFrame(tick);
-      }
-
-      gallery.addEventListener("wheel", function (event) {
-        if (window.innerWidth <= 760) return;
-        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-
-        event.preventDefault();
-        virtualScroll = gallery.scrollLeft + event.deltaY;
-        normalizeScroll();
-      }, { passive: false });
-
-      gallery.addEventListener("pointerenter", function () {
-        setPaused(true);
-      });
-
-      gallery.addEventListener("pointerleave", function () {
-        if (!isDragging) setPaused(false);
-      });
+      window.requestAnimationFrame(setLoopDistance);
 
       gallery.addEventListener("focusin", function () {
-        setPaused(true);
+        gallery.classList.add("is-gallery-paused");
       });
 
       gallery.addEventListener("focusout", function () {
-        setPaused(false);
+        gallery.classList.remove("is-gallery-paused");
       });
 
       gallery.addEventListener("pointerdown", function (event) {
         if (window.innerWidth <= 760) return;
-        isDragging = true;
-        setPaused(true);
-        startX = event.clientX;
-        startScroll = gallery.scrollLeft;
-        virtualScroll = gallery.scrollLeft;
+        gallery.classList.add("is-gallery-paused");
         gallery.setPointerCapture(event.pointerId);
       });
 
-      gallery.addEventListener("pointermove", function (event) {
-        if (!isDragging) return;
-        virtualScroll = startScroll - (event.clientX - startX);
-        normalizeScroll();
-      });
-
       gallery.addEventListener("pointerup", function (event) {
-        isDragging = false;
         if (gallery.hasPointerCapture(event.pointerId)) {
           gallery.releasePointerCapture(event.pointerId);
         }
-        if (!gallery.matches(":hover")) setPaused(false);
+        gallery.classList.remove("is-gallery-paused");
       });
 
       gallery.addEventListener("pointercancel", function () {
-        isDragging = false;
-        if (!gallery.matches(":hover")) setPaused(false);
+        gallery.classList.remove("is-gallery-paused");
       });
 
-      if ("IntersectionObserver" in window) {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            isVisible = entry.isIntersecting;
-          });
-        }, { threshold: 0.05 });
-        observer.observe(gallery);
-      }
-
-      window.requestAnimationFrame(tick);
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 760) window.requestAnimationFrame(setLoopDistance);
+      });
     });
   }
 
