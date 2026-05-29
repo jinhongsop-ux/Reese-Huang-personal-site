@@ -14,6 +14,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Set the Reese Huang page as the WordPress static homepage.
 - Converted WordPress page content into multiple Custom HTML blocks so each section can be moved or edited independently in the page editor.
 - Added page-level CSS to visually hide the original GeneratePress header/footer and make the demo full width.
+- Replaced the homepage text-only Index Wall with a scrollable mixed-size visual capability gallery using `.rh-gallery-section`.
 
 ## Local Files
 
@@ -115,6 +116,7 @@ Avoid:
   - scroll reveal
   - project filtering
   - light pointer-depth effect on project cards
+  - horizontal wheel and drag browsing for the capability gallery
 
 ## Verification Already Performed
 
@@ -125,6 +127,7 @@ Avoid:
 - Homepage is set as the root site page.
 - Project filters exist in the published page markup.
 - Theme header/footer markup still exists in the generated HTML but is visually hidden by page-level CSS.
+- Public homepage contains the new `.rh-gallery-section` visual index and `data-rh-gallery` scroll behavior.
 
 ## Security Notes
 
