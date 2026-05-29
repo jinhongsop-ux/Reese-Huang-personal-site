@@ -20,6 +20,8 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Strengthened the gallery autoplay with virtual scroll accumulation, faster visible motion, and mobile-only static grid behavior without cloned tiles.
 - Rebuilt gallery autoplay as a CSS transform marquee (`rh-gallery-marquee`) with JS only setting the loop distance and clone set.
 - Removed the gallery's real horizontal scrollbar so the loop behaves as a pure visual marquee, and hid the tile index numbers.
+- Added a custom homepage footer and changed the homepage nav to fixed positioning so it remains usable while scrolling.
+- Cleaned the homepage section/card frame system with consistent soft borders, panel backgrounds, and less noisy internal divider lines.
 
 ## Local Files
 
@@ -61,7 +63,7 @@ WordPress setting:
 - `show_on_front = page`
 - `page_on_front = 310`
 
-The homepage content is split into 16 Custom HTML blocks. The project archive content is split into 17 Custom HTML blocks.
+The homepage content is split into 17 Custom HTML blocks. The project archive content is split into 17 Custom HTML blocks.
 
 Each block includes a comment label such as:
 
@@ -124,8 +126,9 @@ Avoid:
   - auto-scrolling infinite capability gallery with hover/focus/hold pause
   - guarded module initialization so one JS error cannot blank the page
   - mobile breakpoint behavior that disables gallery cloning/autoplay and uses a compact readable grid
-  - CSS-based gallery marquee that pauses on focus or pointer hold, but not on passive hover
-  - hidden overflow/scrollbars for the gallery viewport so users cannot drag to a finite end
+- CSS-based gallery marquee that pauses on focus or pointer hold, but not on passive hover
+- hidden overflow/scrollbars for the gallery viewport so users cannot drag to a finite end
+- fixed homepage navigation, custom footer, and unified frame styling for secondary homepage modules
 
 ## Verification Already Performed
 
@@ -142,6 +145,7 @@ Avoid:
 - Public homepage contains the updated gallery speed, virtual scroll state, and mobile clone-hiding CSS.
 - Public homepage no longer uses the old `scrollLeft` autoplay loop; it uses `is-auto-loop` and `--rh-loop-distance`.
 - Public homepage hides `.rh-tile-index` and uses `overflow-x: hidden` plus hidden scrollbar rules for the gallery viewport.
+- Public homepage includes `.rs-site-footer`, fixed `.rs-nav`, and unified frame styles for capability, log, shelf, and card modules.
 
 ## Security Notes
 
