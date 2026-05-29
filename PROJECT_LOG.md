@@ -22,11 +22,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Removed the gallery's real horizontal scrollbar so the loop behaves as a pure visual marquee, and hid the tile index numbers.
 - Added a custom homepage footer and changed the homepage nav to fixed positioning so it remains usable while scrolling.
 - Cleaned the homepage section/card frame system with consistent soft borders, panel backgrounds, and less noisy internal divider lines.
-- **Enhanced typography with literary serif fonts** (EB Garamond + Noto Serif SC) for headings, card titles, and hero subtitle.
-- **Added micro-interactions**: nav link gradient underline animation, card hover lift with soft shadow, button hover shadow feedback.
-- **Deepened color hierarchy** with muted purple/green/yellow variants and soft/hover shadow variables.
-- **Implemented full dark mode** via `prefers-color-scheme: dark` with 12 gallery tone variants.
-- **Enhed nav blur** with `backdrop-filter: blur(20px) saturate(1.2)` for glassmorphism effect.
+- Restored the live WordPress homepage and project archive after an external edit broke styling/module structure; both pages were republished as 17 Custom HTML blocks.
 
 ## Local Files
 
