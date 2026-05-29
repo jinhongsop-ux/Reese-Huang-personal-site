@@ -1,0 +1,21 @@
+# WordPress deployment scripts (contains credentials)
+update-wordpress.py
+update-wordpress.sh
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.local
