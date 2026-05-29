@@ -138,6 +138,12 @@ Avoid:
 - bright saturated palettes
 - nested card-on-card compositions
 
+## Animation Skill Policy
+
+The machine has the official GreenSock `gsap-skills` Claude plugin installed. Use it only when the user explicitly asks for advanced frontend animation guidance. For the Reese Huang site, prefer lightweight CSS animation and vanilla JavaScript first.
+
+Do not add GSAP, ScrollTrigger, CDN scripts, smooth-scroll libraries, or scroll-jacking behavior to the WordPress pages unless the user explicitly approves that dependency and the visual direction. The site should remain quiet, fast, and easy to migrate through Custom HTML blocks.
+
 ## Current Homepage Notes
 
 The capability gallery is a pure visual marquee:

@@ -24,6 +24,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Cleaned the homepage section/card frame system with consistent soft borders, panel backgrounds, and less noisy internal divider lines.
 - Restored the live WordPress homepage and project archive after an external edit broke styling/module structure; both pages were republished as 17 Custom HTML blocks.
 - Removed the homepage gallery's extra scroll-hint decorations and reinforced WordPress full-width container overrides.
+- Installed the official GreenSock `gsap-skills` Claude plugin for optional animation guidance; Reese site policy remains CSS/vanilla JS first unless GSAP is explicitly approved.
 
 ## Local Files
 
