@@ -1,5 +1,10 @@
 (function () {
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var pageRoots = document.querySelectorAll(".reese-space, .reese-projects");
+
+  pageRoots.forEach(function (root) {
+    root.classList.add("is-reveal-ready");
+  });
 
   function initNavigation() {
     var toggle = document.querySelector("[data-menu-toggle]");
@@ -225,9 +230,22 @@
     });
   }
 
-  initNavigation();
-  initReveal();
-  initProjectFilters();
-  initCardDepth();
-  initGalleryScroll();
+  function safeInit(fn) {
+    try {
+      fn();
+    } catch (error) {
+      pageRoots.forEach(function (root) {
+        root.classList.remove("is-reveal-ready");
+      });
+      if (window.console && console.warn) {
+        console.warn("Reese module skipped:", error);
+      }
+    }
+  }
+
+  safeInit(initNavigation);
+  safeInit(initReveal);
+  safeInit(initProjectFilters);
+  safeInit(initCardDepth);
+  safeInit(initGalleryScroll);
 })();
