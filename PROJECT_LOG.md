@@ -19,6 +19,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Repaired homepage display safety by making reveal content visible by default and isolating JS init failures with `safeInit`.
 - Strengthened the gallery autoplay with virtual scroll accumulation, faster visible motion, and mobile-only static grid behavior without cloned tiles.
 - Rebuilt gallery autoplay as a CSS transform marquee (`rh-gallery-marquee`) with JS only setting the loop distance and clone set.
+- Removed the gallery's real horizontal scrollbar so the loop behaves as a pure visual marquee, and hid the tile index numbers.
 
 ## Local Files
 
@@ -124,6 +125,7 @@ Avoid:
   - guarded module initialization so one JS error cannot blank the page
   - mobile breakpoint behavior that disables gallery cloning/autoplay and uses a compact readable grid
   - CSS-based gallery marquee that pauses on focus or pointer hold, but not on passive hover
+  - hidden overflow/scrollbars for the gallery viewport so users cannot drag to a finite end
 
 ## Verification Already Performed
 
@@ -139,6 +141,7 @@ Avoid:
 - Public homepage contains reveal-safe CSS where `[data-reveal]` remains visible even if JavaScript fails.
 - Public homepage contains the updated gallery speed, virtual scroll state, and mobile clone-hiding CSS.
 - Public homepage no longer uses the old `scrollLeft` autoplay loop; it uses `is-auto-loop` and `--rh-loop-distance`.
+- Public homepage hides `.rh-tile-index` and uses `overflow-x: hidden` plus hidden scrollbar rules for the gallery viewport.
 
 ## Security Notes
 

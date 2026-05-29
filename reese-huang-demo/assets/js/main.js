@@ -153,13 +153,13 @@
       gallery.addEventListener("pointerdown", function (event) {
         if (window.innerWidth <= 760) return;
         gallery.classList.add("is-gallery-paused");
-        gallery.setPointerCapture(event.pointerId);
       });
 
-      gallery.addEventListener("pointerup", function (event) {
-        if (gallery.hasPointerCapture(event.pointerId)) {
-          gallery.releasePointerCapture(event.pointerId);
-        }
+      gallery.addEventListener("pointerup", function () {
+        gallery.classList.remove("is-gallery-paused");
+      });
+
+      gallery.addEventListener("pointerleave", function () {
         gallery.classList.remove("is-gallery-paused");
       });
 
