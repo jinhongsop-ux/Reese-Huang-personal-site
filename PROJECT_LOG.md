@@ -31,6 +31,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Restored the site after the homepage was accidentally deleted by recreating the homepage as page ID `396`, recreating the project archive as page ID `397`, and setting `page_on_front = 396`.
 - Migrated the full visual dashboard Hero from page `382-2` into the live homepage Hero, adjusted internal links to current anchors/project archive URLs, replaced the image placeholder with a transparent inline SVG, and started aligning downstream homepage modules with the same dashboard/archive visual language.
 - Removed the duplicated navigation bar from inside the dashboard Hero and restyled the native WordPress/GeneratePress header to inherit the Hero navigation language: `RH` mark, subtle Personal Digital Space label, fine link typography, and pale purple active underline.
+- Converted the homepage page ID `396` from Custom HTML blocks into Elementor data: 13 top-level Elementor Containers, one module per container, each containing one HTML widget. The homepage `post_content` is now intentionally empty because Elementor renders from `_elementor_data`.
 
 ## Local Files
 
@@ -72,24 +73,35 @@ WordPress setting:
 - `show_on_front = page`
 - `page_on_front = 396`
 
-The homepage content is split into 15 Custom HTML blocks. The project archive content is split into 8 Custom HTML blocks.
+The homepage content is managed by Elementor and split into 13 top-level Containers. The project archive content is still split into 8 Custom HTML blocks.
 
-Each block includes a comment label such as:
+Each homepage Elementor container has a title such as `02 hero visual dashboard` or `03 capability gallery`. Project archive blocks include comment labels such as:
 
 ```html
 <!-- Reese module: 02 hero -->
 ```
 
-These labels are intentionally included to help humans and AI agents identify sections in the WordPress editor.
+These labels are intentionally included to help humans and AI agents identify sections in the editor.
 
 ## WordPress Editing Rules
 
-Keep these blocks in place:
+For the homepage, keep the Elementor top-level container model:
 
 - `00 styles`
-- `01 page wrapper open`
-- `98 page wrapper close`
+- `02 hero visual dashboard`
+- `03 capability gallery`
+- `04 digital identity`
+- `05 current focus`
+- `06 project directory`
+- `07 thought index`
+- `08 capability index`
+- `09 visual system`
+- `10 reference shelf`
+- `11 public log`
+- `12 about`
 - `99 scripts`
+
+Do not collapse the homepage back into one Elementor text editor or one Custom HTML block.
 
 Do not move content outside the page wrapper blocks unless rebuilding the full page structure.
 

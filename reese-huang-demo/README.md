@@ -33,6 +33,7 @@ No build step, package install, server, external image, or UI library is require
 - Styles are scoped with `.reese-space` and `.reese-projects` to reduce conflicts with the WordPress theme.
 - On the live WordPress site, navigation and footer use native GeneratePress markup. The primary menu should remain: `Index / Projects / Systems / Notes / References / About`.
 - The page CSS includes page-specific GeneratePress styling for the native header/footer and full-width containers on the Reese homepage and project archive.
+- The live homepage is currently managed in Elementor as 13 top-level Containers. Each module is one Container with one HTML widget, so sections can be rearranged in Elementor without collapsing the page into a single widget.
 
 ## Expansion Ideas
 

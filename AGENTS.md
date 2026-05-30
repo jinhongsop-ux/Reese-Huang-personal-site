@@ -76,7 +76,7 @@ When changing the live WordPress pages:
 
 1. Edit the local static files first.
 2. Validate locally with lightweight checks.
-3. Rebuild the WordPress Custom HTML block content from the local files.
+3. For the homepage, rebuild Elementor `_elementor_data` from the local files as top-level containers. For the project archive, rebuild the WordPress Custom HTML block content from the local files.
 4. Publish through the WordPress REST API.
 5. Verify the public homepage and project archive.
 6. Commit and push changes to GitHub.
@@ -86,25 +86,38 @@ Do not edit only in WordPress and forget to sync the repository.
 
 ## WordPress Block Structure
 
-The WordPress pages are intentionally split into multiple Custom HTML blocks so Reese can rearrange sections later.
+The WordPress homepage is intentionally split into Elementor top-level Containers so Reese can rearrange sections later. The project archive still uses multiple Custom HTML blocks.
 
-Keep these homepage blocks in place:
+Keep these homepage Elementor containers in place:
 
 - `00 styles`
-- `01 page wrapper open`
-- `98 page wrapper close`
+- `02 hero visual dashboard`
+- `03 capability gallery`
+- `04 digital identity`
+- `05 current focus`
+- `06 project directory`
+- `07 thought index`
+- `08 capability index`
+- `09 visual system`
+- `10 reference shelf`
+- `11 public log`
+- `12 about`
 - `99 scripts`
 
-The homepage currently has 15 Custom HTML blocks. It no longer includes custom in-page navigation or a custom site footer; WordPress native header/footer handle those roles.
+The homepage currently has 13 top-level Elementor Containers. Each container contains one HTML widget. Do not collapse it back into one Elementor widget or Custom HTML block.
 
 Keep these project archive blocks in place:
 
 - `00 styles`
 - `01 page wrapper open`
-- `05 project list open`
-- `90 project list close`
+- `02 project hero`
+- `03 project filters`
+- `04 project list`
+- `05 archive closing`
 - `98 page wrapper close`
 - `99 scripts`
+
+The project archive currently has 8 Custom HTML blocks.
 
 Do not move content outside wrapper open/close blocks unless rebuilding the page intentionally.
 
