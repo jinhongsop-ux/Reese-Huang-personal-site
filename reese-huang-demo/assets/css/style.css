@@ -57,26 +57,31 @@ body:has(.reese-space) .content-area,
 body:has(.reese-space) .site-main,
 body:has(.reese-space) .inside-article,
 body:has(.reese-space) .entry-content,
+body:has(.reese-space) #page,
 body:has(.reese-projects) .site-content,
 body:has(.reese-projects) .content-area,
 body:has(.reese-projects) .site-main,
 body:has(.reese-projects) .inside-article,
 body:has(.reese-projects) .entry-content,
+body:has(.reese-projects) #page,
 body.home .site-content,
 body.home .content-area,
 body.home .site-main,
 body.home .inside-article,
 body.home .entry-content,
+body.home #page,
 body.page-id-310 .site-content,
 body.page-id-310 .content-area,
 body.page-id-310 .site-main,
 body.page-id-310 .inside-article,
 body.page-id-310 .entry-content,
+body.page-id-310 #page,
 body.page-id-311 .site-content,
 body.page-id-311 .content-area,
 body.page-id-311 .site-main,
 body.page-id-311 .inside-article,
-body.page-id-311 .entry-content {
+body.page-id-311 .entry-content,
+body.page-id-311 #page {
   margin: 0 !important;
   max-width: none !important;
   padding: 0 !important;
@@ -110,11 +115,15 @@ body.page-id-311 .site-header {
     linear-gradient(90deg, rgba(251, 250, 245, 0.9), rgba(251, 250, 245, 0.76)),
     radial-gradient(circle at 18% 50%, rgba(207, 195, 239, 0.18), transparent 26%),
     radial-gradient(circle at 84% 50%, rgba(185, 222, 210, 0.2), transparent 30%);
-  border-bottom: 1px solid rgba(32, 35, 31, 0.1);
-  box-shadow: 0 14px 42px rgba(38, 51, 43, 0.08);
-  position: sticky;
+  border-bottom: 1px solid rgba(32, 35, 31, 0.1) !important;
+  box-shadow: 0 14px 42px rgba(38, 51, 43, 0.08) !important;
+  color: #18342d !important;
+  left: 0;
+  position: sticky !important;
+  right: 0;
   top: 0;
-  z-index: 1000;
+  width: 100% !important;
+  z-index: 1000 !important;
 }
 
 body.admin-bar:has(.reese-space) .site-header,
@@ -131,8 +140,9 @@ body.home .inside-header,
 body.page-id-310 .inside-header,
 body.page-id-311 .inside-header {
   align-items: center;
-  max-width: none;
-  padding: 14px clamp(18px, 4vw, 56px);
+  max-width: none !important;
+  padding: 14px clamp(18px, 4vw, 56px) !important;
+  width: 100% !important;
 }
 
 body:has(.reese-space) .site-branding,
@@ -170,7 +180,7 @@ body:has(.reese-projects) .main-navigation,
 body.home .main-navigation,
 body.page-id-310 .main-navigation,
 body.page-id-311 .main-navigation {
-  background: transparent;
+  background: transparent !important;
 }
 
 body:has(.reese-space) .main-navigation .inside-navigation,
@@ -178,7 +188,8 @@ body:has(.reese-projects) .main-navigation .inside-navigation,
 body.home .main-navigation .inside-navigation,
 body.page-id-310 .main-navigation .inside-navigation,
 body.page-id-311 .main-navigation .inside-navigation {
-  max-width: none;
+  background: transparent !important;
+  max-width: none !important;
 }
 
 body:has(.reese-space) .main-navigation .main-nav ul li a,
@@ -186,7 +197,8 @@ body:has(.reese-projects) .main-navigation .main-nav ul li a,
 body.home .main-navigation .main-nav ul li a,
 body.page-id-310 .main-navigation .main-nav ul li a,
 body.page-id-311 .main-navigation .main-nav ul li a {
-  color: #6d7069;
+  background: transparent !important;
+  color: #6d7069 !important;
   font-size: 13px;
   line-height: 40px;
   padding-left: clamp(9px, 1.2vw, 16px);
@@ -204,8 +216,8 @@ body:has(.reese-projects) .main-navigation .main-nav ul li[class*="current-menu-
 body.home .main-navigation .main-nav ul li[class*="current-menu-"] > a,
 body.page-id-310 .main-navigation .main-nav ul li[class*="current-menu-"] > a,
 body.page-id-311 .main-navigation .main-nav ul li[class*="current-menu-"] > a {
-  background: transparent;
-  color: #18342d;
+  background: transparent !important;
+  color: #18342d !important;
 }
 
 body:has(.reese-space) .main-navigation .main-nav ul li:hover > a,
@@ -243,8 +255,11 @@ body.page-id-311 .site-info {
     linear-gradient(145deg, rgba(255, 255, 250, 0.74), rgba(255, 255, 250, 0.46)),
     radial-gradient(circle at 12% 18%, rgba(207, 195, 239, 0.2), transparent 30%),
     radial-gradient(circle at 92% 88%, rgba(185, 222, 210, 0.22), transparent 34%);
-  border-top: 1px solid rgba(24, 52, 45, 0.1);
-  color: #18342d;
+  background-color: #fbfaf5 !important;
+  border-top: 1px solid rgba(24, 52, 45, 0.1) !important;
+  color: #18342d !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
 
 body:has(.reese-space) .inside-site-info,
@@ -255,9 +270,10 @@ body.page-id-311 .inside-site-info {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  max-width: none;
+  max-width: none !important;
   min-height: 116px;
-  padding: 28px clamp(18px, 4vw, 56px);
+  padding: 28px clamp(18px, 4vw, 56px) !important;
+  width: 100% !important;
 }
 
 body:has(.reese-space) .copyright-bar,
@@ -265,11 +281,50 @@ body:has(.reese-projects) .copyright-bar,
 body.home .copyright-bar,
 body.page-id-310 .copyright-bar,
 body.page-id-311 .copyright-bar {
-  color: rgba(24, 52, 45, 0.62);
+  color: rgba(24, 52, 45, 0.62) !important;
   font-size: 12px;
   letter-spacing: 0.08em;
   line-height: 1.6;
   text-align: left;
+  text-transform: uppercase;
+}
+
+body:has(.reese-space) .copyright-bar:not(:has(.rh-footer-title)),
+body:has(.reese-projects) .copyright-bar:not(:has(.rh-footer-title)),
+body.home .copyright-bar:not(:has(.rh-footer-title)),
+body.page-id-310 .copyright-bar:not(:has(.rh-footer-title)),
+body.page-id-311 .copyright-bar:not(:has(.rh-footer-title)) {
+  color: transparent !important;
+  font-size: 0;
+}
+
+body:has(.reese-space) .copyright-bar:not(:has(.rh-footer-title))::before,
+body:has(.reese-projects) .copyright-bar:not(:has(.rh-footer-title))::before,
+body.home .copyright-bar:not(:has(.rh-footer-title))::before,
+body.page-id-310 .copyright-bar:not(:has(.rh-footer-title))::before,
+body.page-id-311 .copyright-bar:not(:has(.rh-footer-title))::before {
+  color: #18342d;
+  content: "Reese Huang";
+  display: block;
+  font-size: clamp(1.35rem, 3vw, 2.6rem);
+  font-weight: 520;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+body:has(.reese-space) .copyright-bar:not(:has(.rh-footer-title))::after,
+body:has(.reese-projects) .copyright-bar:not(:has(.rh-footer-title))::after,
+body.home .copyright-bar:not(:has(.rh-footer-title))::after,
+body.page-id-310 .copyright-bar:not(:has(.rh-footer-title))::after,
+body.page-id-311 .copyright-bar:not(:has(.rh-footer-title))::after {
+  color: rgba(24, 52, 45, 0.62);
+  content: "Personal Digital Space / SEO, AI, Independent Sites, and Quiet Experiments. © 2026";
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  margin-top: 10px;
   text-transform: uppercase;
 }
 
