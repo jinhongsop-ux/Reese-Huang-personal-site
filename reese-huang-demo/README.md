@@ -31,6 +31,8 @@ No build step, package install, server, external image, or UI library is require
 - Put `assets/css/style.css` into theme custom CSS, Elementor Custom CSS, or another site-level CSS area.
 - Put `assets/js/main.js` into a footer script area or a lightweight script plugin.
 - Styles are scoped with `.reese-space` and `.reese-projects` to reduce conflicts with the WordPress theme.
+- On the live WordPress site, navigation and footer use native GeneratePress markup. The primary menu should remain: `Index / Projects / Systems / Notes / References / About`.
+- The page CSS includes page-specific GeneratePress styling for the native header/footer and full-width containers on the Reese homepage and project archive.
 
 ## Expansion Ideas
 

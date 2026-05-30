@@ -26,6 +26,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Removed the homepage gallery's extra scroll-hint decorations and reinforced WordPress full-width container overrides.
 - Installed the official GreenSock `gsap-skills` Claude plugin for optional animation guidance; Reese site policy remains CSS/vanilla JS first unless GSAP is explicitly approved.
 - Upgraded the homepage toward a more image-and-text editorial gallery feel: hero gained a coded avatar/index cover, project cards gained generated visual covers, and the Visual System expanded from 3 to 6 coded media cards.
+- Switched the live site back to native WordPress/GeneratePress header and footer containers, restyled them to match the Reese visual system, replaced the primary menu with `Index / Projects / Systems / Notes / References / About`, and removed the custom in-page nav/footer modules.
 
 ## Local Files
 
@@ -93,7 +94,7 @@ On the project archive page, also keep these blocks in place:
 
 Do not move content outside the page wrapper blocks unless rebuilding the full page structure.
 
-The page-level CSS currently hides the theme header/footer and removes GeneratePress container width limits for page IDs `310`, `311`, and `body.home`.
+The page-level CSS currently keeps the native GeneratePress header/footer visible, restyles them for the Reese visual system, and removes GeneratePress container width limits for page IDs `310`, `311`, and `body.home`.
 
 ## Design Direction
 
@@ -142,14 +143,14 @@ Avoid:
 - Chinese text renders correctly after UTF-8 re-upload.
 - Homepage is set as the root site page.
 - Project filters exist in the published page markup.
-- Theme header/footer markup still exists in the generated HTML but is visually hidden by page-level CSS.
+- Theme header/footer markup is now the visible site navigation/footer layer and is styled by page-level CSS.
 - Public homepage contains the new `.rh-gallery-section` visual index and `data-rh-gallery` scroll behavior.
 - Public homepage contains the optimized gallery loop code using `requestAnimationFrame`, cloned gallery items, and pointer/focus pause events.
 - Public homepage contains reveal-safe CSS where `[data-reveal]` remains visible even if JavaScript fails.
 - Public homepage contains the updated gallery speed, virtual scroll state, and mobile clone-hiding CSS.
 - Public homepage no longer uses the old `scrollLeft` autoplay loop; it uses `is-auto-loop` and `--rh-loop-distance`.
 - Public homepage hides `.rh-tile-index` and uses `overflow-x: hidden` plus hidden scrollbar rules for the gallery viewport.
-- Public homepage includes `.rs-site-footer`, fixed `.rs-nav`, and unified frame styles for capability, log, shelf, and card modules.
+- Public homepage no longer includes custom `.rs-nav` or `.rs-site-footer`; navigation and footer are handled by native WordPress/GeneratePress markup.
 
 ## Security Notes
 

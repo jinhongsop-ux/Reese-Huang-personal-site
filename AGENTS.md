@@ -64,7 +64,7 @@ Known WordPress pages:
 
 The homepage is set as the static front page.
 
-The original GeneratePress header/footer is visually hidden by page-level CSS. The custom demo navigation and footer should remain the visible structure.
+The native GeneratePress header/footer are the visible site-level navigation and footer. They are restyled by the page CSS to match the Reese visual system.
 
 ## Editing Model
 
@@ -90,11 +90,10 @@ Keep these homepage blocks in place:
 
 - `00 styles`
 - `01 page wrapper open`
-- `02 navigation`
 - `98 page wrapper close`
 - `99 scripts`
 
-The homepage currently has 17 Custom HTML blocks after the custom footer was added.
+The homepage currently has 15 Custom HTML blocks. It no longer includes custom in-page navigation or a custom site footer; WordPress native header/footer handle those roles.
 
 Keep these project archive blocks in place:
 
@@ -177,8 +176,8 @@ After publishing, verify:
 - homepage contains `.reese-space`
 - homepage contains `.rh-gallery-section`
 - homepage contains `rh-gallery-marquee`
-- homepage contains `.rs-site-footer`
-- homepage has fixed `.rs-nav`
+- homepage does not contain `.rs-nav` or `.rs-site-footer`
+- WordPress native primary menu is `Index / Projects / Systems / Notes / References / About`
 - project archive contains `.reese-projects`
 - Chinese text is not garbled
 - LiteSpeed cache is serving the updated content

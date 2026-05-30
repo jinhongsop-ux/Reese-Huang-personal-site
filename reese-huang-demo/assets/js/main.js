@@ -7,39 +7,28 @@
   });
 
   function initNavigation() {
-    var toggle = document.querySelector("[data-menu-toggle]");
-    var nav = toggle ? toggle.closest(".rs-nav") : null;
-    var links = document.querySelectorAll('a[href^="#"], a[href*=".html#"]');
-
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        var isOpen = nav.classList.toggle("menu-open");
-        toggle.setAttribute("aria-expanded", String(isOpen));
-      });
-    }
+    var links = document.querySelectorAll('a[href*="#"]');
 
     links.forEach(function (link) {
       link.addEventListener("click", function (event) {
         var href = link.getAttribute("href");
         if (!href || href.indexOf("#") === -1) return;
 
-        var currentPage = window.location.pathname.split("/").pop() || "index.html";
-        var parts = href.split("#");
-        var targetPage = parts[0];
-        var targetId = parts[1];
+        var url;
+        try {
+          url = new URL(href, window.location.href);
+        } catch (error) {
+          return;
+        }
 
-        if (!targetId) return;
-        if (targetPage && targetPage !== currentPage) return;
+        var targetId = url.hash.slice(1);
+        if (!targetId || url.origin !== window.location.origin || url.pathname !== window.location.pathname) return;
 
         var target = document.getElementById(targetId);
         if (!target) return;
 
         event.preventDefault();
         target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
-        if (nav) {
-          nav.classList.remove("menu-open");
-          toggle.setAttribute("aria-expanded", "false");
-        }
       });
     });
   }
@@ -173,6 +162,22 @@
     });
   }
 
+  function initNativeFooter() {
+    var footerBar = document.querySelector(".site-info .copyright-bar");
+    if (!footerBar) return;
+
+    footerBar.innerHTML = '<span class="rh-footer-title">Reese Huang</span><span class="rh-footer-line">Personal Digital Space / SEO, AI, Independent Sites, and Quiet Experiments. © 2026</span>';
+  }
+
+  function initNativeFooterWhenReady() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNativeFooter);
+      return;
+    }
+
+    initNativeFooter();
+  }
+
   function safeInit(fn) {
     try {
       fn();
@@ -191,4 +196,5 @@
   safeInit(initProjectFilters);
   safeInit(initCardDepth);
   safeInit(initGalleryScroll);
+  safeInit(initNativeFooterWhenReady);
 })();
