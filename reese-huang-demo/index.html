@@ -121,24 +121,6 @@
   overflow:       hidden;
 }
 
-/* TOP NAV */
-.rh-top-nav {
-  display:         flex;
-  align-items:     center;
-  justify-content: space-between;
-  gap:             24px;
-  flex-shrink:     0;
-  z-index:         10;
-  position:        relative;
-}
-.rh-logo { color: var(--rs-ink-green); font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 640; letter-spacing: .08em; line-height: 1; }
-.rh-nav-links { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); color: rgba(24,52,45,.64); font-size: 13px; }
-.rh-nav-links a { position: relative; transition: color 220ms var(--rs-ease), transform 220ms var(--rs-ease); }
-.rh-nav-links a:hover { color: var(--rs-ink-green); transform: translateY(-1px); }
-.rh-nav-links a:first-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--rs-purple); }
-.rh-social-mini { display: flex; gap: 8px; align-items: center; }
-.rh-social-mini a { width: 26px; height: 26px; border-radius: 999px; border: 1px solid rgba(24,52,45,.12); background: rgba(255,255,250,.44); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(24,52,45,.62); }
-
 /* COPY BLOCK */
 .rh-copy-block {
   position:   relative;
@@ -362,7 +344,6 @@
   .rh-hero-layout { grid-template-columns: 1fr; }
   .rh-left-rail   { display: none; }
   .rh-main-stage, .rh-dashboard { grid-column: 1; padding-left: clamp(16px, 4vw, 28px); padding-right: clamp(16px, 4vw, 28px); }
-  .rh-nav-links, .rh-social-mini { display: none; }
   .rh-copy-block  { max-width: 100%; margin-top: 60px; }
   .rh-title       { font-size: clamp(3.6rem, 16vw, 6rem); white-space: normal; }
   .rh-person-wrap { right: 0; bottom: auto; top: 100px; width: 68vw; height: 360px; opacity: .48; }
@@ -390,17 +371,6 @@
 
   <!-- MAIN STAGE -->
   <div class="rh-main-stage">
-    <header class="rh-top-nav">
-      <a class="rh-logo" href="/">RH</a>
-      <nav class="rh-nav-links" aria-label="Hero navigation">
-        <a href="/">Home</a><a href="#index">Archive</a><a href="/project-archive/">Projects</a>
-        <a href="#notes">Notes</a><a href="#references">Fictional</a><a href="#about">Contact</a>
-      </nav>
-      <div class="rh-social-mini" aria-label="Social links">
-        <a href="#" aria-label="X">X</a><a href="#" aria-label="GitHub">G</a><a href="#" aria-label="LinkedIn">in</a>
-      </div>
-    </header>
-
     <section class="rh-copy-block">
       <p class="rh-kicker">Personal Digital Space / Reese Huang</p>
       <h1 class="rh-title"><span>Reese</span><span>Huang</span></h1>
