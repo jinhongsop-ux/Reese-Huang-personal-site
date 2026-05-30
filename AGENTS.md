@@ -59,8 +59,8 @@ Current live site:
 
 Known WordPress pages:
 
-- Homepage page ID: `310`
-- Project archive page ID: `311`
+- Homepage page ID: `396`
+- Project archive page ID: `397`
 
 The homepage is set as the static front page.
 

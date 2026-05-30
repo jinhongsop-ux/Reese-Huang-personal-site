@@ -28,6 +28,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Upgraded the homepage toward a more image-and-text editorial gallery feel: hero gained a coded avatar/index cover, project cards gained generated visual covers, and the Visual System expanded from 3 to 6 coded media cards.
 - Switched the live site back to native WordPress/GeneratePress header and footer containers, restyled them to match the Reese visual system, replaced the primary menu with `Index / Projects / Systems / Notes / References / About`, and removed the custom in-page nav/footer modules.
 - Cleared the legacy GeneratePress footer widget areas `footer-1`, `footer-2`, and `footer-3` in WordPress so the old “Reese Explores China” widget footer no longer renders above the native Reese footer.
+- Restored the site after the homepage was accidentally deleted by recreating the homepage as page ID `396`, recreating the project archive as page ID `397`, and setting `page_on_front = 396`.
 
 ## Local Files
 
@@ -57,24 +58,24 @@ The important files are:
 
 Published pages:
 
-- Homepage page ID: `310`
-- Homepage slug: `reese-huang`
+- Homepage page ID: `396`
+- Homepage slug: `home-2` (served as the static root homepage)
 - Homepage public URL: `https://reesehuang.com/`
-- Project archive page ID: `311`
+- Project archive page ID: `397`
 - Project archive slug: `project-archive`
 - Project archive public URL: `https://reesehuang.com/project-archive/`
 
 WordPress setting:
 
 - `show_on_front = page`
-- `page_on_front = 310`
+- `page_on_front = 396`
 
-The homepage content is split into 17 Custom HTML blocks. The project archive content is split into 17 Custom HTML blocks.
+The homepage content is split into 15 Custom HTML blocks. The project archive content is split into 8 Custom HTML blocks.
 
 Each block includes a comment label such as:
 
 ```html
-<!-- Reese module: 02 navigation -->
+<!-- Reese module: 02 hero -->
 ```
 
 These labels are intentionally included to help humans and AI agents identify sections in the WordPress editor.
@@ -88,14 +89,9 @@ Keep these blocks in place:
 - `98 page wrapper close`
 - `99 scripts`
 
-On the project archive page, also keep these blocks in place:
-
-- `05 project list open`
-- `90 project list close`
-
 Do not move content outside the page wrapper blocks unless rebuilding the full page structure.
 
-The page-level CSS currently keeps the native GeneratePress header/footer visible, restyles them for the Reese visual system, and removes GeneratePress container width limits for page IDs `310`, `311`, and `body.home`.
+The page-level CSS currently keeps the native GeneratePress header/footer visible, restyles them for the Reese visual system, and removes GeneratePress container width limits for page IDs `396`, `397`, legacy IDs `310`, `311`, and `body.home`.
 
 ## Design Direction
 
