@@ -29,6 +29,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Switched the live site back to native WordPress/GeneratePress header and footer containers, restyled them to match the Reese visual system, replaced the primary menu with `Index / Projects / Systems / Notes / References / About`, and removed the custom in-page nav/footer modules.
 - Cleared the legacy GeneratePress footer widget areas `footer-1`, `footer-2`, and `footer-3` in WordPress so the old “Reese Explores China” widget footer no longer renders above the native Reese footer.
 - Restored the site after the homepage was accidentally deleted by recreating the homepage as page ID `396`, recreating the project archive as page ID `397`, and setting `page_on_front = 396`.
+- Migrated the full visual dashboard Hero from page `382-2` into the live homepage Hero, adjusted internal links to current anchors/project archive URLs, replaced the image placeholder with a transparent inline SVG, and started aligning downstream homepage modules with the same dashboard/archive visual language.
 
 ## Local Files
 

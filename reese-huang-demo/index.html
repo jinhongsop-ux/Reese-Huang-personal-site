@@ -9,44 +9,504 @@
 </head>
 <body>
   <main class="reese-space">
-    <section class="rs-hero" id="top">
-      <div class="rs-hero-copy" data-reveal>
-        <p class="rs-kicker">Personal Digital Space</p>
-        <h1>Reese Huang</h1>
-        <p class="rs-subtitle">Personal Digital Space</p>
-        <p class="rs-hero-cn">这里不是简历，也不只是博客，而是 Reese Huang 的个人数字空间：思想、项目、能力、兴趣与长期实验的公开索引。</p>
-        <p class="rs-hero-en">Thoughts, projects, systems, and quiet experiments around SEO, AI, independent websites, visual creation, and fictional aesthetics.</p>
-        <div class="rs-hero-actions">
-          <a class="rs-button rs-button-primary" href="#index">Enter the Index</a>
-          <a class="rs-button rs-button-ghost" href="projects.html">View Projects</a>
-        </div>
-      </div>
+    <section class="rh-visual-dashboard-hero" id="top">
+<style>
+/* ── TOKENS ── */
+.rh-visual-dashboard-hero {
+  --rs-ink-green: #18342d;
+  --rs-muted:     #6d7069;
+  --rs-purple:    #cfc3ef;
+  --rs-green:     #b9ded2;
+  --rs-yellow:    #f2d66b;
+  --rs-line:      rgba(32,35,31,.10);
+  --rs-shadow:    0 24px 70px rgba(70,76,62,.12);
+  --rs-radius:    16px;
+  --rs-ease:      cubic-bezier(0.22,1,0.36,1);
+}
 
-      <div class="rs-hero-visual" aria-label="Abstract pale purple and green personal index visual" data-reveal>
-        <div class="rs-orbit rs-orbit-one"></div>
-        <div class="rs-orbit rs-orbit-two"></div>
-        <div class="rs-glow-field"></div>
-        <div class="rs-avatar-silhouette" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="rs-hero-panel rs-hero-panel-a" aria-hidden="true">
-          <span>INDEX</span>
-          <b>SEO / AI / Sites</b>
-        </div>
-        <div class="rs-hero-panel rs-hero-panel-b" aria-hidden="true">
-          <span>MOOD</span>
-          <b>Daisy signal</b>
-        </div>
-        <div class="rs-index-node node-a">SEO</div>
-        <div class="rs-index-node node-b">AI</div>
-        <div class="rs-index-node node-c">IP</div>
-        <div class="rs-index-node node-d">LAB</div>
-        <div class="rs-daisy-mark" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="rs-visual-caption">quiet experiments / public archive / fictional interfaces</div>
+/* ── RESET ── */
+.rh-visual-dashboard-hero *,
+.rh-visual-dashboard-hero *::before,
+.rh-visual-dashboard-hero *::after { box-sizing: border-box; margin: 0; }
+.rh-visual-dashboard-hero a        { color: inherit; text-decoration: none; }
+.rh-visual-dashboard-hero h1,
+.rh-visual-dashboard-hero h2,
+.rh-visual-dashboard-hero h3,
+.rh-visual-dashboard-hero p        { margin: 0; }
+
+/*
+ * ── FULL-BLEED ESCAPE ──
+ * WordPress 的 .entry-content 通常有 max-width + padding。
+ * 用 100vw + 负 margin 逃出去，再用 position:relative 把 z-index 隔离。
+ * 用 overflow-x: clip（不是 hidden）避免产生新的滚动上下文。
+ */
+.rh-visual-dashboard-hero {
+  position:     relative;
+  width:        100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x:   clip;           /* clip 不像 hidden 会截断 position:sticky */
+  overflow-y:   visible;
+
+  /* 高度：恰好一屏，减去 WP 管理栏 32px + 少量主题顶部高度 */
+  height:       calc(100vh - 32px);
+  min-height:   700px;
+  max-height:   1080px;         /* 超高屏不要无限拉伸 */
+
+  background:
+    radial-gradient(circle at 18%  8%,  rgba(207,195,239,.32), transparent 28rem),
+    radial-gradient(circle at 86% 14%,  rgba(185,222,210,.34), transparent 27rem),
+    radial-gradient(circle at 42% 82%,  rgba(242,214,107,.14), transparent 25rem),
+    linear-gradient(180deg, #fbfaf5 0%, #f7f5ee 100%);
+  color:        #20231f;
+  font-family:  ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", sans-serif;
+}
+
+/* grid lines */
+.rh-visual-dashboard-hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(24,52,45,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24,52,45,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 48% 42%, #000 0 42%, transparent 82%);
+  opacity: .75;
+}
+/* bottom fade */
+.rh-visual-dashboard-hero::after {
+  content: ""; position: absolute; inset: auto 0 0; height: 28%; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(251,250,245,.94), transparent);
+}
+
+/* ── THREE-COLUMN LAYOUT ──
+   col1: left rail (narrow fixed)
+   col2: main stage (copy + person)   → flex grow
+   col3: dashboard (right panel)      → flex, no hard min-width
+*/
+.rh-hero-layout {
+  position:              relative;
+  z-index:               2;
+  display:               grid;
+  grid-template-columns: 52px 1fr clamp(380px, 38vw, 580px);
+  height:                100%;   /* fill the section exactly */
+}
+
+/* ── LEFT RAIL ── */
+.rh-left-rail {
+  border-right:    1px solid rgba(24,52,45,.08);
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         24px 0;
+  color:           rgba(24,52,45,.54);
+  z-index:         4;
+}
+.rh-rail-menu      { display: grid; gap: 6px; margin-top: 24px; }
+.rh-rail-menu span { width: 16px; height: 1px; background: rgba(24,52,45,.42); display: block; }
+.rh-rail-word      { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(24,52,45,.52); }
+.rh-rail-time      { display: grid; gap: 6px; text-align: center; font-size: 11px; letter-spacing: .08em; color: rgba(24,52,45,.6); }
+.rh-rail-time strong { color: var(--rs-ink-green); font-size: 12px; font-weight: 560; }
+
+/* ── MAIN STAGE ──
+   flex column: nav → copy → [spacer] → focus card
+   person image は absolute で重ねる
+*/
+.rh-main-stage {
+  position:       relative;
+  display:        flex;
+  flex-direction: column;
+  padding:        clamp(20px, 2.8vh, 36px) clamp(24px, 3.2vw, 52px) clamp(20px, 2.8vh, 36px);
+  overflow:       hidden;
+}
+
+/* TOP NAV */
+.rh-top-nav {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             24px;
+  flex-shrink:     0;
+  z-index:         10;
+  position:        relative;
+}
+.rh-logo { color: var(--rs-ink-green); font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 640; letter-spacing: .08em; line-height: 1; }
+.rh-nav-links { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); color: rgba(24,52,45,.64); font-size: 13px; }
+.rh-nav-links a { position: relative; transition: color 220ms var(--rs-ease), transform 220ms var(--rs-ease); }
+.rh-nav-links a:hover { color: var(--rs-ink-green); transform: translateY(-1px); }
+.rh-nav-links a:first-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px; background: var(--rs-purple); }
+.rh-social-mini { display: flex; gap: 8px; align-items: center; }
+.rh-social-mini a { width: 26px; height: 26px; border-radius: 999px; border: 1px solid rgba(24,52,45,.12); background: rgba(255,255,250,.44); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(24,52,45,.62); }
+
+/* COPY BLOCK */
+.rh-copy-block {
+  position:   relative;
+  z-index:    6;
+  margin-top: clamp(16px, 3.5vh, 52px);
+  flex-shrink: 0;
+  /* 宽度：不超过左侧文案区的 60%，给人物图留空间 */
+  max-width:  min(520px, 58%);
+}
+.rh-kicker { color: var(--rs-ink-green); font-size: 11px; font-weight: 720; letter-spacing: .14em; margin-bottom: 14px; text-transform: uppercase; }
+
+/*
+ * 标题：用 clamp 让字号随视口缩放，永不换行到下一行
+ * line-height < 1 是有意为之的紧凑排版
+ */
+.rh-title {
+  color:          var(--rs-ink-green);
+  font-size:      clamp(3.8rem, 6.8vw, 9rem);
+  font-weight:    520;
+  letter-spacing: -.055em;
+  line-height:    .88;
+  word-break:     normal;
+  overflow-wrap:  normal;
+  hyphens:        none;
+  white-space:    nowrap;   /* 每个 span 是一行，span 本身不换行 */
+}
+.rh-title span { display: block; white-space: nowrap; }
+
+.rh-subtitle {
+  color:       var(--rs-muted);
+  font-size:   clamp(.95rem, 1.4vw, 1.28rem);
+  line-height: 1.5;
+  margin-top:  clamp(10px, 1.6vh, 22px);
+}
+.rh-taxonomy { display: flex; flex-wrap: wrap; gap: 8px; margin-top: clamp(10px, 1.6vh, 20px); }
+.rh-taxonomy span { border: 1px solid rgba(24,52,45,.09); border-radius: 999px; background: rgba(255,255,250,.54); color: rgba(24,52,45,.68); display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; }
+.rh-taxonomy span:nth-child(2),.rh-taxonomy span:nth-child(5) { background: rgba(207,195,239,.28); color: rgba(104,91,139,.9); }
+.rh-taxonomy span:nth-child(3),.rh-taxonomy span:nth-child(6) { background: rgba(185,222,210,.32); color: #254c42; }
+.rh-desc { color: #4c514b; font-size: clamp(.9rem, 1.1vw, 1rem); line-height: 1.75; margin-top: clamp(10px, 1.4vh, 18px); max-width: 460px; }
+.rh-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(14px, 2vh, 26px); }
+.rh-button { align-items: center; border: 1px solid var(--rs-line); border-radius: 999px; display: inline-flex; font-size: 12.5px; justify-content: center; min-height: 40px; padding: 0 16px; transition: transform 240ms var(--rs-ease), background 240ms var(--rs-ease), border-color 240ms var(--rs-ease); }
+.rh-button:hover { transform: translateY(-2px); }
+.rh-button-primary { background: var(--rs-ink-green); border-color: var(--rs-ink-green); color: #fbfaf5; }
+.rh-button-ghost   { background: rgba(255,255,255,.38); color: var(--rs-ink-green); }
+
+/* PERSON — absolute, 靠右下角，不影响 flex 流 */
+.rh-person-wrap {
+  position:       absolute;
+  z-index:        4;
+  right:          clamp(-20px, 2vw, 40px);
+  bottom:         0;
+  width:          clamp(240px, 34vw, 460px);
+  height:         78%;
+  pointer-events: none;
+}
+.rh-person-placeholder {
+  position: absolute; left: 12%; right: 8%; bottom: 0; height: 76%;
+  border-radius: 999px 999px 42% 42%;
+  background: radial-gradient(circle at 50% 16%, rgba(251,250,245,.96) 0 15%, transparent 15.8%), radial-gradient(ellipse at 50% 78%, rgba(251,250,245,.72) 0 36%, transparent 36.8%), linear-gradient(180deg, rgba(207,195,239,.34), rgba(185,222,210,.28));
+  border: 1px solid rgba(24,52,45,.09);
+  box-shadow: inset 0 0 0 18px rgba(255,255,250,.18), 0 24px 70px rgba(76,89,77,.12);
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+}
+.rh-person-placeholder::before { content: "IMAGE\A PLACEHOLDER"; white-space: pre; position: absolute; left: 50%; top: 48%; transform: translate(-50%,-50%); color: rgba(24,52,45,.36); font-size: 12px; letter-spacing: .12em; line-height: 1.6; text-align: center; text-transform: uppercase; }
+.rh-person-img { position: absolute; left: 50%; bottom: 0; z-index: 3; width: 88%; height: 96%; transform: translateX(-50%); object-fit: contain; object-position: center bottom; display: block; mask-image: linear-gradient(to bottom, #000 78%, transparent 100%); }
+/* FLOATING SYSTEM TAG */
+.rh-floating-system {
+  position: absolute; right: 0; top: 32%; z-index: 8;
+  min-width: 156px; padding: 12px 14px; display: grid; gap: 5px;
+  border: 1px solid rgba(24,52,45,.10); border-radius: 14px;
+  background: rgba(255,255,250,.66); box-shadow: 0 18px 42px rgba(76,89,77,.09);
+  backdrop-filter: blur(14px);
+}
+.rh-floating-system span { color: rgba(24,52,45,.46); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.rh-floating-system b    { color: var(--rs-ink-green); font-size: 12.5px; font-weight: 560; }
+
+/* FOCUS CARD — flex で main-stage の底に押し付ける */
+.rh-focus-card {
+  position:      relative;
+  z-index:       9;
+  width:         min(500px, 68%);
+  margin-top:    auto;
+  padding:       18px 20px;
+  border:        1px solid rgba(24,52,45,.09);
+  border-radius: var(--rs-radius);
+  background:    linear-gradient(145deg, rgba(255,255,250,.84), rgba(255,255,250,.48)), radial-gradient(circle at 18% 12%, rgba(207,195,239,.16), transparent 28%), radial-gradient(circle at 86% 88%, rgba(185,222,210,.18), transparent 30%);
+  box-shadow:    0 18px 42px rgba(76,89,77,.09);
+  overflow:      hidden;
+}
+.rh-focus-card::after { content: ""; position: absolute; inset: 1px; border: 1px solid rgba(255,255,250,.64); border-radius: inherit; pointer-events: none; }
+.rh-focus-label { display: block; color: rgba(104,91,139,.74); font-size: 11.5px; letter-spacing: .14em; margin-bottom: 16px; text-transform: uppercase; }
+.rh-focus-body  { display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 18px; align-items: end; }
+.rh-focus-mark  { width: 96px; height: 96px; border-radius: 20px; border: 1px solid rgba(24,52,45,.08); background: linear-gradient(rgba(24,52,45,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(24,52,45,.06) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(207,195,239,.76), transparent 34%), radial-gradient(circle at 66% 64%, rgba(185,222,210,.58), transparent 30%), #fffdf8; background-size: 18px 18px, 18px 18px, auto, auto, auto; position: relative; }
+.rh-focus-mark::after { content: ""; position: absolute; left: 38px; top: 38px; width: 20px; height: 20px; border-radius: 50%; background: var(--rs-yellow); box-shadow: 0 -26px 0 rgba(255,255,250,.78), 22px -13px 0 rgba(255,255,250,.78), 22px 13px 0 rgba(255,255,250,.78), 0 26px 0 rgba(255,255,250,.78), -22px 13px 0 rgba(255,255,250,.78), -22px -13px 0 rgba(255,255,250,.78); }
+.rh-focus-text p { color: var(--rs-ink-green); font-size: clamp(.92rem, 1.1vw, 1.04rem); line-height: 1.65; }
+.rh-focus-pills  { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.rh-focus-pills span { padding: 4px 8px; border-radius: 999px; background: rgba(185,222,210,.22); border: 1px solid rgba(24,52,45,.08); color: rgba(24,52,45,.62); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ── DASHBOARD (right column) ── */
+.rh-dashboard {
+  border-left:     1px solid rgba(24,52,45,.07);
+  display:         flex;
+  flex-direction:  column;
+  padding:         clamp(20px, 2.8vh, 36px) clamp(16px, 2.4vw, 40px) clamp(20px, 2.8vh, 36px) clamp(14px, 2vw, 32px);
+  overflow:        hidden;   /* 内容超出时隐藏，不撑开 */
+  height:          100%;
+}
+
+.rh-panel-title { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #254c42; font-size: 11.5px; font-weight: 720; letter-spacing: .14em; text-transform: uppercase; flex-shrink: 0; }
+.rh-panel-title::after { content: ""; height: 1px; flex: 1; background: rgba(24,52,45,.11); }
+
+.rh-panel { position: relative; overflow: hidden; border: 1px solid rgba(24,52,45,.09); border-radius: var(--rs-radius); background: linear-gradient(145deg, rgba(255,255,250,.82), rgba(255,255,250,.48)), radial-gradient(circle at 18% 12%, rgba(207,195,239,.14), transparent 28%), radial-gradient(circle at 86% 88%, rgba(185,222,210,.16), transparent 30%); box-shadow: 0 14px 38px rgba(70,76,62,.055); }
+.rh-panel::after { content: ""; position: absolute; inset: 1px; border: 1px solid rgba(255,255,250,.64); border-radius: inherit; pointer-events: none; }
+
+/* NAV GRID: 4列固定，紧凑 */
+.rh-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; flex-shrink: 0; }
+
+.rh-img-card {
+  --ta: #e8f0e6; --tb: #f8f4e8; --tc: #c8ded1;
+  min-height: clamp(80px, 6.4vw, 112px);
+  padding: 12px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border: 1px solid rgba(24,52,45,.09); border-radius: var(--rs-radius);
+  background: linear-gradient(180deg, rgba(255,255,250,.12), rgba(255,255,250,.72)), linear-gradient(145deg, var(--ta), var(--tb));
+  box-shadow: 0 10px 28px rgba(56,67,56,.07);
+  position: relative; overflow: hidden;
+  transition: transform 240ms var(--rs-ease), box-shadow 240ms var(--rs-ease), border-color 240ms var(--rs-ease);
+}
+.rh-img-card:hover { border-color: rgba(24,52,45,.18); box-shadow: var(--rs-shadow); transform: translateY(-4px); }
+.rh-img-card > * { position: relative; z-index: 2; }
+.rh-card-icon  { width: 24px; height: 24px; border-radius: 7px; border: 1px solid rgba(24,52,45,.22); background: rgba(255,255,250,.42); flex-shrink: 0; }
+.rh-img-card strong { color: var(--rs-ink-green); display: block; font-size: 11px; font-weight: 560; line-height: 1.2; text-transform: uppercase; }
+.rh-card-arrow { position: absolute; right: 10px; bottom: 8px; color: rgba(24,52,45,.5); font-size: 14px; z-index: 3; }
+
+.tone-seo    { --ta:#dbe8d8; --tb:#f7f5ea; --tc:#9dbda9; }
+.tone-ai     { --ta:#d8eee8; --tb:#f4f8f2; --tc:#9ccfc1; }
+.tone-sites  { --ta:#e8e3f2; --tb:#faf7ef; --tc:#c7c1dc; }
+.tone-dtc    { --ta:#eee9d8; --tb:#f8f6ec; --tc:#d8c98d; }
+.tone-prompt { --ta:#ebe4f8; --tb:#fbf7f0; --tc:#cab9ef; }
+.tone-reze   { --ta:#e8dcf2; --tb:#f8f3ed; --tc:#c6b0df; }
+.tone-visual { --ta:#efe0eb; --tb:#faf5ee; --tc:#d5bfd4; }
+.tone-agent  { --ta:#e6efe9; --tb:#f8f6ef; --tc:#b6d9cc; }
+
+/* MID ROW */
+.rh-mid-row { display: grid; grid-template-columns: minmax(0,1fr) 195px; gap: 10px; margin-top: 10px; flex-shrink: 0; }
+.rh-notes-panel   { padding: 14px; }
+.rh-note-row      { display: grid; grid-template-columns: minmax(0,1fr) 58px; gap: 10px; border-bottom: 1px solid rgba(24,52,45,.075); padding: 8px 0; }
+.rh-note-row:first-of-type { padding-top: 0; }
+.rh-note-row:last-child     { border-bottom: 0; padding-bottom: 0; }
+.rh-note-row span { color: var(--rs-muted); font-size: 12px; line-height: 1.45; }
+.rh-note-row span::before { content: ""; display: inline-block; width: 5px; height: 5px; margin-right: 8px; border-radius: 50%; background: var(--rs-purple); vertical-align: 2px; }
+.rh-note-row time { color: rgba(24,52,45,.46); font-size: 10.5px; letter-spacing: .08em; text-align: right; text-transform: uppercase; }
+
+.rh-activity-panel { padding: 14px; }
+.rh-activity-meta  { display: flex; justify-content: space-between; margin-bottom: 8px; color: rgba(24,52,45,.5); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.rh-activity-grid  { display: grid; grid-template-columns: repeat(9,1fr); gap: 4px; padding: 10px; border-radius: 10px; border: 1px solid rgba(24,52,45,.08); background: rgba(255,255,250,.38); }
+.rh-activity-cell      { aspect-ratio: 1; border-radius: 3px; background: rgba(24,52,45,.08); }
+.rh-activity-cell.lv1  { background: rgba(185,222,210,.52); }
+.rh-activity-cell.lv2  { background: rgba(185,222,210,.82); }
+.rh-activity-cell.lv3  { background: rgba(207,195,239,.82); }
+.rh-activity-cell.lv4  { background: rgba(242,214,107,.88); }
+
+/* PROJECTS */
+.rh-projects { margin-top: 10px; flex-shrink: 0; }
+.rh-project-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
+.rh-project-head .rh-panel-title { flex: 1; margin-bottom: 0; }
+.rh-view-all { color: rgba(24,52,45,.62); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.rh-project-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.rh-project-card { min-height: clamp(110px, 8.5vw, 148px); display: flex; flex-direction: column; transition: transform 240ms var(--rs-ease), box-shadow 240ms var(--rs-ease), border-color 240ms var(--rs-ease); }
+.rh-project-card:hover { transform: translateY(-4px); border-color: rgba(24,52,45,.18); box-shadow: var(--rs-shadow); }
+.rh-project-bg { height: clamp(46px, 3.8vw, 68px); margin: 10px 10px 0; border-radius: 10px; border: 1px solid rgba(24,52,45,.08); background: linear-gradient(180deg, rgba(255,255,250,.04), rgba(255,255,250,.5)), linear-gradient(145deg, rgba(207,195,239,.72), rgba(185,222,210,.56)); position: relative; overflow: hidden; }
+.rh-project-bg::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(24,52,45,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(24,52,45,.055) 1px, transparent 1px); background-size: 16px 16px; opacity: .68; }
+.rh-project-body { padding: 10px; }
+.rh-project-body h3 { color: var(--rs-ink-green); font-size: 13px; font-weight: 560; margin-bottom: 4px; }
+.rh-project-body p  { color: rgba(24,52,45,.52); font-size: 10px; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
+
+/* QUOTE */
+.rh-quote-panel { margin-top: 10px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 14px; color: rgba(24,52,45,.62); font-size: 11px; letter-spacing: .11em; line-height: 1.65; text-transform: uppercase; flex-shrink: 0; }
+.rh-status::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-radius: 50%; background: #8fbb9b; box-shadow: 0 0 12px rgba(143,187,155,.58); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — single clean cascade, no !important
+═══════════════════════════════════════ */
+
+/* 矮屏笔记本 (1366×768 etc.) — 减少内部垂直间距 */
+@media (max-height: 800px) and (min-width: 1100px) {
+  .rh-visual-dashboard-hero { max-height: 900px; }
+  .rh-main-stage, .rh-dashboard { padding-top: 16px; padding-bottom: 16px; }
+  .rh-copy-block   { margin-top: 10px; }
+  .rh-title        { font-size: clamp(3.4rem, 6.2vw, 7.2rem); }
+  .rh-taxonomy     { margin-top: 10px; }
+  .rh-desc         { margin-top: 8px; }
+  .rh-actions      { margin-top: 12px; }
+  .rh-button       { min-height: 36px; padding: 0 13px; font-size: 12px; }
+  .rh-img-card     { min-height: 76px; padding: 10px; }
+  .rh-mid-row      { margin-top: 8px; }
+  .rh-projects     { margin-top: 8px; }
+  .rh-project-bg   { height: 42px; }
+  .rh-quote-panel  { display: none; }
+  .rh-focus-card   { padding: 14px 16px; }
+  .rh-focus-body   { grid-template-columns: 80px minmax(0,1fr); gap: 14px; }
+  .rh-focus-mark   { width: 80px; height: 80px; }
+  .rh-focus-mark::after { left: 30px; top: 30px; }
+}
+
+/* 中等宽度: 右侧 dashboard 移至下方，主区域全宽 */
+@media (max-width: 1099px) {
+  .rh-visual-dashboard-hero { height: auto; min-height: 100vh; max-height: none; }
+  .rh-hero-layout { grid-template-columns: 44px 1fr; }
+  .rh-main-stage  { grid-column: 2; min-height: calc(100vh - 32px); }
+  .rh-dashboard   { grid-column: 2; height: auto; min-height: auto; padding: 28px clamp(24px, 4vw, 52px) 48px; border-left: none; border-top: 1px solid rgba(24,52,45,.07); }
+  .rh-copy-block  { max-width: min(560px, 58%); margin-top: 56px; }
+  .rh-title       { font-size: clamp(4.2rem, 11vw, 7.6rem); }
+  .rh-person-wrap { width: min(44vw, 480px); right: 3%; }
+  .rh-nav-grid, .rh-project-grid { grid-template-columns: repeat(4,1fr); }
+}
+
+/* 平板 */
+@media (max-width: 860px) {
+  .rh-hero-layout { grid-template-columns: 1fr; }
+  .rh-left-rail   { display: none; }
+  .rh-main-stage, .rh-dashboard { grid-column: 1; padding-left: clamp(16px, 4vw, 28px); padding-right: clamp(16px, 4vw, 28px); }
+  .rh-nav-links, .rh-social-mini { display: none; }
+  .rh-copy-block  { max-width: 100%; margin-top: 60px; }
+  .rh-title       { font-size: clamp(3.6rem, 16vw, 6rem); white-space: normal; }
+  .rh-person-wrap { right: 0; bottom: auto; top: 100px; width: 68vw; height: 360px; opacity: .48; }
+  .rh-nav-grid, .rh-project-grid { grid-template-columns: repeat(2,1fr); }
+  .rh-mid-row     { grid-template-columns: 1fr; }
+}
+
+/* 手机 */
+@media (max-width: 520px) {
+  .rh-title         { font-size: clamp(3.2rem, 17vw, 5.2rem); }
+  .rh-person-wrap   { width: 86vw; height: 280px; opacity: .3; }
+  .rh-focus-body    { grid-template-columns: 1fr; }
+  .rh-focus-mark    { width: 72px; height: 72px; }
+  .rh-nav-grid, .rh-project-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+
+<div class="rh-hero-layout">
+  <!-- LEFT RAIL -->
+  <aside class="rh-left-rail">
+    <div class="rh-rail-menu" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="rh-rail-word">Building in Public</div>
+    <div class="rh-rail-time"><strong id="rhRailTime">--:--</strong><span id="rhRailDate">00/00</span></div>
+  </aside>
+
+  <!-- MAIN STAGE -->
+  <div class="rh-main-stage">
+    <header class="rh-top-nav">
+      <a class="rh-logo" href="/">RH</a>
+      <nav class="rh-nav-links" aria-label="Hero navigation">
+        <a href="/">Home</a><a href="#index">Archive</a><a href="/project-archive/">Projects</a>
+        <a href="#notes">Notes</a><a href="#references">Fictional</a><a href="#about">Contact</a>
+      </nav>
+      <div class="rh-social-mini" aria-label="Social links">
+        <a href="#" aria-label="X">X</a><a href="#" aria-label="GitHub">G</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </header>
+
+    <section class="rh-copy-block">
+      <p class="rh-kicker">Personal Digital Space / Reese Huang</p>
+      <h1 class="rh-title"><span>Reese</span><span>Huang</span></h1>
+      <p class="rh-subtitle">A digital space, not a resume.</p>
+      <div class="rh-taxonomy">
+        <span>Operator</span><span>AI Systems</span><span>Archive</span>
+        <span>Fictional</span><span>Visual Lab</span><span>Independent Sites</span>
+      </div>
+      <p class="rh-desc">SEO systems, independent sites, AI workflows, visual experiments, and content architecture shaped into a personal digital space.</p>
+      <div class="rh-actions">
+        <a class="rh-button rh-button-primary" href="#index">Explore Space →</a>
+        <a class="rh-button rh-button-ghost"   href="/project-archive/">View Projects</a>
       </div>
     </section>
+
+    <figure class="rh-person-wrap" aria-hidden="true">
+      <div class="rh-person-placeholder"></div>
+      <img class="rh-person-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="">
+    </figure>
+
+    <div class="rh-floating-system"><span>Systems</span><b>Search / Content / Architecture</b></div>
+
+    <article class="rh-focus-card">
+      <span class="rh-focus-label">Current Focus</span>
+      <div class="rh-focus-body">
+        <div class="rh-focus-mark" aria-hidden="true"></div>
+        <div class="rh-focus-text">
+          <p>Connecting search, systems, projects, and aesthetic thinking into a personal digital space.</p>
+          <div class="rh-focus-pills">
+            <span>SEO</span><span>AI</span><span>Systems</span><span>Content</span><span>Automation</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- DASHBOARD -->
+  <aside class="rh-dashboard">
+    <div class="rh-panel-title">Navigate Space</div>
+    <div class="rh-nav-grid">
+      <a class="rh-img-card tone-seo"    href="#index"><div class="rh-card-icon"></div><strong>Capability Gallery</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-sites"  href="/project-archive/">         <div class="rh-card-icon"></div><strong>Project Directory</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-prompt" href="#notes">            <div class="rh-card-icon"></div><strong>Prompt Library</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-reze"   href="/project-archive/#rezeclaw"><div class="rh-card-icon"></div><strong>RezeClaw</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-visual" href="#visual-system">     <div class="rh-card-icon"></div><strong>Visual Lab</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-dtc"    href="/project-archive/">         <div class="rh-card-icon"></div><strong>Independent Sites</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-ai"     href="#notes">            <div class="rh-card-icon"></div><strong>SEO</strong><span class="rh-card-arrow">↗</span></a>
+      <a class="rh-img-card tone-agent"  href="#notes">            <div class="rh-card-icon"></div><strong>AI Workflows</strong><span class="rh-card-arrow">↗</span></a>
+    </div>
+
+    <div class="rh-mid-row">
+      <section class="rh-panel rh-notes-panel">
+        <div class="rh-panel-title">Latest Notes</div>
+        <div id="rhLatestNotes">
+          <div class="rh-note-row"><span>Building an AI SEO agent with real search feedback loops</span><time>May 18</time></div>
+          <div class="rh-note-row"><span>Why I build independent sites and keep them small</span><time>May 12</time></div>
+          <div class="rh-note-row"><span>Content architecture as a system, not a page</span><time>May 08</time></div>
+          <div class="rh-note-row"><span>Fictional interfaces and the future of personal OS</span><time>May 03</time></div>
+        </div>
+      </section>
+      <section class="rh-panel rh-activity-panel">
+        <div class="rh-panel-title">Active Map</div>
+        <div class="rh-activity-meta"><span id="rhActivityLabel">Last 63 Days</span><span id="rhActivityCount">-- Updates</span></div>
+        <div class="rh-activity-grid" id="rhActivityGrid" aria-label="Content activity map"></div>
+      </section>
+    </div>
+
+    <section class="rh-projects">
+      <div class="rh-project-head">
+        <div class="rh-panel-title">Featured Projects</div>
+        <a class="rh-view-all" href="/project-archive/">View All Projects →</a>
+      </div>
+      <div class="rh-project-grid">
+        <article class="rh-panel rh-project-card"><div class="rh-project-bg"></div><div class="rh-project-body"><h3>RezeClaw</h3><p>AI System</p></div></article>
+        <article class="rh-panel rh-project-card"><div class="rh-project-bg"></div><div class="rh-project-body"><h3>Content OS</h3><p>System / Tooling</p></div></article>
+        <article class="rh-panel rh-project-card"><div class="rh-project-bg"></div><div class="rh-project-body"><h3>Archive Grid</h3><p>Digital Archive</p></div></article>
+        <article class="rh-panel rh-project-card"><div class="rh-project-bg"></div><div class="rh-project-body"><h3>Fictional UI</h3><p>Visual Experiment</p></div></article>
+      </div>
+    </section>
+
+    <div class="rh-panel rh-quote-panel">
+      <div>"I build systems that compound.<br>I write things down so they can scale."</div>
+      <div class="rh-status">Based in Internet</div>
+    </div>
+  </aside>
+</div>
+
+<script>
+(function(){
+  var timeEl=document.getElementById("rhRailTime"),dateEl=document.getElementById("rhRailDate");
+  function tick(){var n=new Date(),hh=String(n.getHours()).padStart(2,"0"),mm=String(n.getMinutes()).padStart(2,"0"),mo=String(n.getMonth()+1).padStart(2,"0"),dd=String(n.getDate()).padStart(2,"0");if(timeEl)timeEl.textContent=hh+":"+mm;if(dateEl)dateEl.textContent=mo+"/"+dd;}
+  tick();setInterval(tick,60000);
+  var grid=document.getElementById("rhActivityGrid"),countEl=document.getElementById("rhActivityCount"),notesEl=document.getElementById("rhLatestNotes");
+  if(!grid)return;
+  var DAYS=63,today=new Date();today.setHours(0,0,0,0);
+  var keys=[];for(var i=DAYS-1;i>=0;i--){var d=new Date(today);d.setDate(today.getDate()-i);keys.push(d.toISOString().slice(0,10));}
+  function emptyGrid(){grid.innerHTML=keys.map(function(){return'<span class="rh-activity-cell"></span>';}).join("");}
+  function esc(s){return String(s||"").replace(/[&<>"']/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m];});}
+  function lvl(n){return n>=4?"lv4":n===3?"lv3":n===2?"lv2":n===1?"lv1":"";}
+  function renderActivity(items){var c={},total=0;items.forEach(function(it){var raw=it.modified||it.date;if(!raw)return;var k=new Date(raw).toISOString().slice(0,10);if(!keys.includes(k))return;c[k]=(c[k]||0)+1;total++;});grid.innerHTML=keys.map(function(k){var n=c[k]||0;return'<span class="rh-activity-cell '+lvl(n)+'" title="'+k+': '+n+' update(s)"></span>';}).join("");if(countEl)countEl.textContent=total+" Updates";}
+  function renderNotes(items){if(!notesEl||!items.length)return;var latest=items.slice().sort(function(a,b){return new Date(b.modified||b.date)-new Date(a.modified||a.date);}).slice(0,4);notesEl.innerHTML=latest.map(function(it){var t=it.title&&it.title.rendered?it.title.rendered:"Untitled",date=it.modified||it.date,link=it.link||"#",mo=new Date(date).toLocaleDateString("en-US",{month:"short",day:"2-digit"});return'<a class="rh-note-row" href="'+esc(link)+'"><span>'+esc(t.replace(/<[^>]*>/g,""))+'</span><time>'+esc(mo)+'</time></a>';}).join("");}
+  emptyGrid();
+  Promise.allSettled(["/wp-json/wp/v2/posts?per_page=100&_fields=date,modified,link,title","/wp-json/wp/v2/pages?per_page=100&_fields=date,modified,link,title"].map(function(url){return fetch(url,{credentials:"same-origin"}).then(function(r){return r.ok?r.json():[];});})).then(function(res){var items=res.flatMap(function(r){return r.status==="fulfilled"&&Array.isArray(r.value)?r.value:[];});if(items.length){renderActivity(items);renderNotes(items);}}).catch(emptyGrid);
+})();
+</script>
+</section>
 
     <section class="rh-gallery-section" id="index" data-reveal>
       <div class="rh-gallery-head">

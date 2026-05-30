@@ -179,6 +179,7 @@ After publishing, verify:
 - homepage contains `.rh-gallery-section`
 - homepage contains `rh-gallery-marquee`
 - homepage does not contain `.rs-nav` or `.rs-site-footer`
+- homepage Hero uses the migrated `.rh-visual-dashboard-hero` module from page `382-2`
 - WordPress native primary menu is `Index / Projects / Systems / Notes / References / About`
 - project archive contains `.reese-projects`
 - Chinese text is not garbled
