@@ -27,6 +27,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Installed the official GreenSock `gsap-skills` Claude plugin for optional animation guidance; Reese site policy remains CSS/vanilla JS first unless GSAP is explicitly approved.
 - Upgraded the homepage toward a more image-and-text editorial gallery feel: hero gained a coded avatar/index cover, project cards gained generated visual covers, and the Visual System expanded from 3 to 6 coded media cards.
 - Switched the live site back to native WordPress/GeneratePress header and footer containers, restyled them to match the Reese visual system, replaced the primary menu with `Index / Projects / Systems / Notes / References / About`, and removed the custom in-page nav/footer modules.
+- Cleared the legacy GeneratePress footer widget areas `footer-1`, `footer-2`, and `footer-3` in WordPress so the old “Reese Explores China” widget footer no longer renders above the native Reese footer.
 
 ## Local Files
 
@@ -144,6 +145,7 @@ Avoid:
 - Homepage is set as the root site page.
 - Project filters exist in the published page markup.
 - Theme header/footer markup is now the visible site navigation/footer layer and is styled by page-level CSS.
+- Footer widget areas `footer-1`, `footer-2`, and `footer-3` are intentionally empty. Do not repopulate them with the old travel-site footer.
 - Public homepage contains the new `.rh-gallery-section` visual index and `data-rh-gallery` scroll behavior.
 - Public homepage contains the optimized gallery loop code using `requestAnimationFrame`, cloned gallery items, and pointer/focus pause events.
 - Public homepage contains reveal-safe CSS where `[data-reveal]` remains visible even if JavaScript fails.

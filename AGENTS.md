@@ -66,6 +66,8 @@ The homepage is set as the static front page.
 
 The native GeneratePress header/footer are the visible site-level navigation and footer. They are restyled by the page CSS to match the Reese visual system.
 
+GeneratePress footer widget areas `footer-1`, `footer-2`, and `footer-3` are intentionally empty. They previously contained the old “Reese Explores China” footer and should stay empty unless a new Reese-specific footer widget design is requested.
+
 ## Editing Model
 
 The static source of truth is the local `reese-huang-demo/` folder.
