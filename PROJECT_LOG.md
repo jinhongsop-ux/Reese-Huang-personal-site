@@ -1,6 +1,6 @@
 # Reese Huang Personal Digital Space - Project Log
 
-Last updated: 2026-05-29
+Last updated: 2026-05-30
 
 ## Purpose
 
@@ -32,6 +32,7 @@ This file is the shared project memory for Reese Huang's personal website work. 
 - Migrated the full visual dashboard Hero from page `382-2` into the live homepage Hero, adjusted internal links to current anchors/project archive URLs, replaced the image placeholder with a transparent inline SVG, and started aligning downstream homepage modules with the same dashboard/archive visual language.
 - Removed the duplicated navigation bar from inside the dashboard Hero and restyled the native WordPress/GeneratePress header to inherit the Hero navigation language: `RH` mark, subtle Personal Digital Space label, fine link typography, and pale purple active underline.
 - Converted the homepage page ID `396` from Custom HTML blocks into Elementor data: 13 top-level Elementor Containers, one module per container, each containing one HTML widget. The homepage `post_content` is now intentionally empty because Elementor renders from `_elementor_data`.
+- Reframed the homepage Hero away from a commercial dashboard style into `.rh-little-world-hero`, a full-bleed coded background scene titled `Reese Huang's Little Digital World`.
 
 ## Local Files
 
@@ -75,7 +76,7 @@ WordPress setting:
 
 The homepage content is managed by Elementor and split into 13 top-level Containers. The project archive content is still split into 8 Custom HTML blocks.
 
-Each homepage Elementor container has a title such as `02 hero visual dashboard` or `03 capability gallery`. Project archive blocks include comment labels such as:
+Each homepage Elementor container has a title such as `02 hero little digital world` or `03 capability gallery`. Project archive blocks include comment labels such as:
 
 ```html
 <!-- Reese module: 02 hero -->
@@ -88,7 +89,7 @@ These labels are intentionally included to help humans and AI agents identify se
 For the homepage, keep the Elementor top-level container model:
 
 - `00 styles`
-- `02 hero visual dashboard`
+- `02 hero little digital world`
 - `03 capability gallery`
 - `04 digital identity`
 - `05 current focus`
@@ -163,6 +164,7 @@ Avoid:
 - Public homepage no longer uses the old `scrollLeft` autoplay loop; it uses `is-auto-loop` and `--rh-loop-distance`.
 - Public homepage hides `.rh-tile-index` and uses `overflow-x: hidden` plus hidden scrollbar rules for the gallery viewport.
 - Public homepage no longer includes custom `.rs-nav` or `.rs-site-footer`; navigation and footer are handled by native WordPress/GeneratePress markup.
+- Public homepage now contains `.rh-little-world-hero`, does not contain `.rh-visual-dashboard-hero`, and renders `Reese Huang's Little Digital World` from Elementor page ID `396`.
 
 ## Security Notes
 

@@ -91,7 +91,7 @@ The WordPress homepage is intentionally split into Elementor top-level Container
 Keep these homepage Elementor containers in place:
 
 - `00 styles`
-- `02 hero visual dashboard`
+- `02 hero little digital world`
 - `03 capability gallery`
 - `04 digital identity`
 - `05 current focus`
@@ -192,8 +192,8 @@ After publishing, verify:
 - homepage contains `.rh-gallery-section`
 - homepage contains `rh-gallery-marquee`
 - homepage does not contain `.rs-nav` or `.rs-site-footer`
-- homepage Hero uses the migrated `.rh-visual-dashboard-hero` module from page `382-2`
-- homepage Hero should not contain an internal `.rh-top-nav`; the visible navigation is the native GeneratePress header styled to match the Hero nav language
+- homepage Hero uses the `.rh-little-world-hero` module with the title `Reese Huang's Little Digital World`
+- homepage Hero should not contain an internal `.rh-top-nav`; the visible navigation is the native GeneratePress header styled to match the Little Digital World visual language
 - WordPress native primary menu is `Index / Projects / Systems / Notes / References / About`
 - project archive contains `.reese-projects`
 - Chinese text is not garbled
