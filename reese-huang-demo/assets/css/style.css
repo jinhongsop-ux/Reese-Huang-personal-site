@@ -246,6 +246,11 @@ body:has(.reese-projects) .site-footer,
 body.home .site-footer,
 body.page-id-310 .site-footer,
 body.page-id-311 .site-footer,
+body:has(.reese-space) .footer-widgets,
+body:has(.reese-projects) .footer-widgets,
+body.home .footer-widgets,
+body.page-id-310 .footer-widgets,
+body.page-id-311 .footer-widgets,
 body:has(.reese-space) .site-info,
 body:has(.reese-projects) .site-info,
 body.home .site-info,
@@ -260,6 +265,14 @@ body.page-id-311 .site-info {
   color: #18342d !important;
   margin: 0 !important;
   width: 100% !important;
+}
+
+body:has(.reese-space) .footer-widgets,
+body:has(.reese-projects) .footer-widgets,
+body.home .footer-widgets,
+body.page-id-310 .footer-widgets,
+body.page-id-311 .footer-widgets {
+  display: none !important;
 }
 
 body:has(.reese-space) .inside-site-info,
